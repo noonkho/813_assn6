@@ -92,8 +92,8 @@
     ; John jumping jack goal
     (= (exe-duration john jj) 20)
     ; John rack's goal
-    ; (>= (exe-duration john bp) 30)
-    ; (>= (exe-duration john sp) 10)
+    ; (= (exe-duration john bp) 10) ; if uncomment then it will stuck forever
+    ; (>= (exe-duration john sp) 10) ; if uncomment then it will stuck forever
 
 ))
 

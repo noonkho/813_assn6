@@ -54,7 +54,7 @@
         (at start (not-exercising))
         (at start (< (exe-count ?p ?e) (max-exercise-count)))
 
-        ; (at start (idle))
+        (at start (idle))
 
         (at start (exercise-need ?e ?eq))
 
@@ -77,21 +77,21 @@
 )
 
 
-; (:durative-action take_break ; you must take break in between exercises (or else you will die :p)
-;         :parameters (?p - person ?from ?to - exercise)
-;         :duration (= ?duration 1)
-;         :condition (and
-;             (at start (current-exercise ?p ?from))
-;             (at start (exercise-change ?from ?to))
+(:durative-action take_break ; you must take break in between exercises (or else you will die :p)
+        :parameters (?p - person ?from ?to - exercise)
+        :duration (= ?duration 1)
+        :condition (and
+            (at start (current-exercise ?p ?from))
+            (at start (exercise-change ?from ?to))
 
-;             (at end (current-exercise ?p ?to))
-;         ) 
-;         :effect (and
-;             (at start (idle))
+            (at end (current-exercise ?p ?to))
+        ) 
+        :effect (and
+            (at start (idle))
 
-;             (at end (not (idle)))
-;         )
-; )
+            (at end (not (idle)))
+        )
+)
 
 (:durative-action using_equip
     :parameters (?p - person ?eq - equipment)
