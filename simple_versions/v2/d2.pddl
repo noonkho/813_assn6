@@ -20,6 +20,7 @@
     (current-exercise ?p - person ?e - exercise)
     (exercise-change ?e1 ?e2 - exercise)
     (idle ?p - person)
+
 )
 
 
@@ -32,6 +33,8 @@
     
     (workout_duration ?p - person)
     
+    (max-exercise-count)
+    (max-length-count ?l - length)
 )
 
 
@@ -40,8 +43,8 @@
     :duration (= ?duration (exe-length ?l))
     :condition (and
         (at start (not-exercising ?p))
-
         (at start (idle ?p))
+        (at start (< (exe-count ?p ?e) (max-exercise-count)))
     )
     :effect (and
         (at start (not (not-exercising ?p)))
@@ -61,7 +64,7 @@
 
 (:durative-action take_break ; you must take break in between exercises (or else you will die)
         :parameters (?p - person ?from ?to - exercise)
-        :duration (= ?duration 5)
+        :duration (= ?duration 0.1)
         :condition (and
             (at start (current-exercise ?p ?from))
             (at start (exercise-change ?from ?to))

@@ -1,8 +1,8 @@
 (define (problem workout_v2) (:domain gym_v2)
 (:objects 
+    squat jj - exercise
     short mid long - length
     john noon - person
-    squat jj mc - exercise
 )
 
 (:init
@@ -12,6 +12,9 @@
     (= (exe-length mid) 10)
     (= (exe-length long) 15)
 
+    ; Restriction
+    (= (max-exercise-count) 3)
+
     ; Initial counts for John
     (= (exe-count john squat) 0)
     (= (exe-duration john squat) 0)
@@ -19,64 +22,52 @@
     (= (exe-count john jj) 0)
     (= (exe-duration john jj) 0)
 
-    (= (workout_duration john) 0) 
+    (= (workout_duration john) 0)   
+
+    (current-exercise john warmup)
+
 
     ; Initial counts for Noon
     (= (exe-count noon squat) 0)
     (= (exe-duration noon squat) 0)
     
-    (= (exe-count noon mc) 0)
-    (= (exe-duration noon mc) 0)
+    (= (exe-count noon jj) 0)
+    (= (exe-duration noon jj) 0)
 
-    (= (workout_duration noon) 0) 
+    (= (workout_duration noon) 0)   
 
-    ; John
-    (current-exercise john warmup)
-
-    ; Noon
     (current-exercise noon warmup)
 
+    ; Required Predicates to switch between exercises
     (exercise-change warmup jj)
     (exercise-change warmup squat)
-
     (exercise-change jj jj)
     (exercise-change jj squat)
     (exercise-change squat jj)
     (exercise-change squat squat)
-    (exercise-change squat mc)
-    (exercise-change mc mc)
-
 
     (not-exercising john)
     (not-exercising noon)
-
 
 )
 
 (:goal (and
-    ;todo: put the goal condition here
     (not-exercising john)
     (not-exercising noon)
 
-    ; John working out
     ; John workout duration in total
-    (>= (workout_duration john) 60)
+    (>= (workout_duration john) 50)
     ; John squat goal
-    (= (exe-count john squat) 3)
     (>= (exe-duration john squat) 30)
     ; John jumping jack goal
-    (= (exe-count john jj) 3)
-    (>= (exe-duration john jj) 20)
+    (= (exe-duration john jj) 20)
 
-    ; Noon working out
     ; Noon workout duration in total
-    (>= (workout_duration noon) 80)
+    (>= (workout_duration noon) 60)
     ; Noon squat goal
-    (= (exe-count noon squat) 5)
-    (>= (exe-duration noon squat) 50)
-    ; Noon Mountain climbing goal
-    (= (exe-count noon mc) 3)
-    (>= (exe-duration noon mc) 30)
+    (>= (exe-duration noon squat) 10)
+    ; Noon jumping jack goal
+    (>= (exe-duration noon jj) 30)
 
 ))
 

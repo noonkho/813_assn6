@@ -1,0 +1,45 @@
+Number of literals: 13
+Constructing lookup tables: [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Post filtering unreachable actions:  [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+(exe-count john squat) has a finite lower bound: [0.000,inf]
+(exe-duration john squat) has a finite lower bound: [0.000,inf]
+(exe-count john jj) has a finite lower bound: [0.000,inf]
+(exe-duration john jj) has a finite lower bound: [0.000,inf]
+(exe-count john bp) has a finite lower bound: [0.000,inf]
+(exe-duration john bp) has a finite lower bound: [0.000,inf]
+(exe-count john sp) has a finite lower bound: [0.000,inf]
+(exe-duration john sp) has a finite lower bound: [0.000,inf]
+(workout_duration john) has a finite lower bound: [0.000,inf]
+Have identified that smaller values of (exe-count john squat) are preferable
+Have identified that bigger values of (exe-duration john squat) are preferable
+Have identified that smaller values of (exe-count john jj) are preferable
+Have identified that smaller values of (exe-count john bp) are preferable
+Have identified that smaller values of (exe-count john sp) are preferable
+Have identified that bigger values of (workout_duration john) are preferable
+Recognised a monotonic-change-induced limit on -1.000*var3(exe-duration john jj)
+- Must be >= -20.000
+[01;34mFor limits: literal goal index 0, fact (not-exercising), is static or a precondition[00m
+None of the ground temporal actions in this problem have been recognised as compression-safe
+Initial heuristic = 41.000, admissible cost estimate 0.000
+b (40.000 | 0.100)b (39.000 | 31.001)b (36.000 | 31.001)b (35.000 | 31.001)b (32.000 | 31.001)b (29.000 | 31.001)
+Resorting to best-first search
+Running WA* with W = 5.000, not restarting with goal states
+b (40.000 | 0.100)b (39.000 | 31.001)b (38.000 | 31.001)b (36.000 | 31.001)b (32.000 | 31.001)b (31.000 | 31.001)b (30.000 | 31.001)b (29.000 | 31.001)b (26.000 | 31.001)b (22.000 | 31.001)b (21.000 | 31.001)b (20.000 | 31.001)b (18.000 | 62.001)b (14.000 | 62.001)b (13.000 | 62.002)b (12.000 | 62.002)b (10.000 | 62.001)b (9.000 | 62.002)b (8.000 | 98.007)b (7.000 | 98.007)b (6.000 | 108.906)b (6.000 | 98.007)b (5.000 | 108.906)b (3.000 | 108.906)b (1.000 | 108.906)(G);;;; Solution Found
+; States evaluated: 973
+; Cost: 108.906
+; Time 0.69
+0.000: (move john not_gym a_space)  [0.100]
+0.001: (using_equip john a_space)  [31.000]
+0.002: (do-exercise john a_space squat long)  [15.000]
+15.003: (do-exercise john a_space squat long)  [15.000]
+30.904: (move john a_space a_space)  [0.100]
+31.002: (using_equip john a_space)  [31.000]
+31.003: (do-exercise john a_space jj long)  [15.000]
+46.004: (do-exercise john a_space squat long)  [15.000]
+61.904: (move john a_space a_space)  [0.100]
+62.003: (using_equip john a_space)  [31.000]
+62.005: (do-exercise john a_space jj short)  [5.000]
+77.905: (move john a_space a_space)  [0.100]
+77.906: (using_equip john rack)  [31.000]
+78.004: (do-exercise john rack bp long)  [15.000]
+93.905: (do-exercise john rack bp long)  [15.000]
