@@ -1,0 +1,64 @@
+Number of literals: 10
+Constructing lookup tables: [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Post filtering unreachable actions:  [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+(exe-count john squat) has a finite lower bound: [0.000,inf]
+(exe-duration john squat) has a finite lower bound: [0.000,inf]
+(exe-count john jj) has a finite lower bound: [0.000,inf]
+(exe-duration john jj) has a finite lower bound: [0.000,inf]
+(workout_duration john) has a finite lower bound: [0.000,inf]
+(exe-count noon squat) has a finite lower bound: [0.000,inf]
+(exe-duration noon squat) has a finite lower bound: [0.000,inf]
+(exe-count noon jj) has a finite lower bound: [0.000,inf]
+(exe-duration noon jj) has a finite lower bound: [0.000,inf]
+(workout_duration noon) has a finite lower bound: [0.000,inf]
+(exe-count john warmup) has finite bounds: [0.000,0.000]
+(exe-duration john warmup) has finite bounds: [0.000,0.000]
+(exe-count noon warmup) has finite bounds: [0.000,0.000]
+(exe-duration noon warmup) has finite bounds: [0.000,0.000]
+Have identified that smaller values of (exe-count john squat) are preferable
+Have identified that bigger values of (exe-duration john squat) are preferable
+Have identified that smaller values of (exe-count john jj) are preferable
+Have identified that bigger values of (workout_duration john) are preferable
+Have identified that smaller values of (exe-count noon squat) are preferable
+Have identified that bigger values of (exe-duration noon squat) are preferable
+Have identified that smaller values of (exe-count noon jj) are preferable
+Have identified that bigger values of (exe-duration noon jj) are preferable
+Have identified that bigger values of (workout_duration noon) are preferable
+Have identified that smaller values of (exe-count john warmup) are preferable
+Have identified that smaller values of (exe-count noon warmup) are preferable
+Recognised a monotonic-change-induced limit on -1.000*var3(exe-duration john jj)
+- Must be >= -20.000
+[01;34mFor limits: literal goal index 0, fact (not-exercising john), is static or a precondition[00m
+[01;34mFor limits: literal goal index 1, fact (not-exercising noon), is static or a precondition[00m
+None of the ground temporal actions in this problem have been recognised as compression-safe
+Initial heuristic = 60.000, admissible cost estimate 0.000
+b (59.000 | 0.100)b (58.000 | 0.101)b (55.000 | 5.002)b (52.000 | 5.003)
+Resorting to best-first search
+Running WA* with W = 5.000, not restarting with goal states
+b (59.000 | 0.100)b (58.000 | 0.101)b (56.000 | 5.001)b (52.000 | 15.001)b (51.000 | 15.001)b (50.000 | 15.001)b (47.000 | 15.001)b (47.000 | 15.000)b (42.000 | 15.003)b (41.000 | 15.004)b (39.000 | 20.001)b (34.000 | 30.001)b (33.000 | 30.002)b (30.000 | 30.002)b (28.000 | 30.003)b (28.000 | 30.002)b (25.000 | 30.005)b (23.000 | 40.004)b (22.000 | 40.004)b (19.000 | 40.004)b (15.000 | 45.003)b (13.000 | 45.003)b (11.000 | 55.006)b (11.000 | 55.005)b (9.000 | 55.006)b (8.000 | 55.006)b (6.000 | 55.006)b (5.000 | 55.006)b (3.000 | 55.007)b (2.000 | 60.006)(G);;;; Solution Found
+; States evaluated: 640
+; Cost: 60.007
+; Time 0.77
+0.000: (take_break john warmup jj)  [0.100]
+0.001: (do-exercise john jj long)  [15.000]
+0.002: (take_break noon warmup jj)  [0.100]
+0.003: (do-exercise noon jj long)  [15.000]
+14.905: (take_break noon jj jj)  [0.100]
+14.906: (take_break john jj squat)  [0.100]
+15.002: (do-exercise john squat long)  [15.000]
+15.004: (do-exercise noon jj mid)  [10.000]
+24.906: (take_break john squat squat)  [0.100]
+24.907: (take_break noon jj squat)  [0.100]
+25.005: (do-exercise noon squat long)  [15.000]
+29.904: (take_break noon squat squat)  [0.100]
+29.905: (take_break john squat squat)  [0.100]
+30.003: (do-exercise john squat long)  [15.000]
+39.907: (take_break john squat squat)  [0.100]
+39.908: (take_break noon squat jj)  [0.100]
+40.006: (do-exercise noon jj long)  [15.000]
+44.904: (take_break noon jj jj)  [0.100]
+44.907: (take_break john squat jj)  [0.100]
+45.005: (take_break noon jj jj)  [0.100]
+45.006: (do-exercise john jj short)  [5.000]
+54.908: (take_break noon jj squat)  [0.100]
+55.007: (do-exercise noon squat short)  [5.000]

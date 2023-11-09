@@ -1,6 +1,6 @@
 ;Header and description
 
-(define (domain gym_v1)
+(define (domain gym_v2)
 
 ;remove requirements that are not needed
 (:requirements :fluents :durative-actions :timed-initial-literals :typing :conditional-effects :negative-preconditions :duration-inequalities :equality)
@@ -16,12 +16,11 @@
 )
 
 (:predicates
-    (not-exercising)
+    (not-exercising ?p - person)
     (current-exercise ?p - person ?e - exercise)
-    ; (exercise-change ?p - person ?e1 ?e2 - exercise)
     (exercise-change ?e1 ?e2 - exercise)
-    (idle)
-    (resting)
+    (idle ?p - person)
+
 )
 
 
@@ -43,17 +42,17 @@
     :parameters (?p - person ?e - exercise ?l - length)
     :duration (= ?duration (exe-length ?l))
     :condition (and
-        (at start (not-exercising))
-        (at start (idle))
+        (at start (not-exercising ?p))
+        (at start (idle ?p))
         (at start (< (exe-count ?p ?e) (max-exercise-count)))
     )
     :effect (and
-        (at start (not (not-exercising)))
+        (at start (not (not-exercising ?p)))
         (at start (not (current-exercise ?p warmup)))
         (at start (current-exercise ?p ?e))
 
         (at end (and
-            (not-exercising)
+            (not-exercising ?p)
             (increase (exe-count ?p ?e) 1)
             (increase (exe-duration ?p ?e) (exe-length ?l))
             (increase (workout_duration ?p) (exe-length ?l))
@@ -72,12 +71,10 @@
             (at end (current-exercise ?p ?to))
         ) 
         :effect (and
-            (at start (idle))
-            (at end (not (idle)))
+            (at start (idle ?p))
+            (at end (not (idle ?p)))
         )
 )
-
-
 
 
 

@@ -70,7 +70,7 @@
 
     ; Noon working out
     ; Noon workout duration in total
-    (>= (workout_duration noon) 90)
+    (>= (workout_duration noon) 80)
     ; Noon squat goal
     (= (exe-count noon squat) 5)
     (>= (exe-duration noon squat) 50)
