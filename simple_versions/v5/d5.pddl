@@ -1,6 +1,6 @@
 ;Header and description
 
-(define (domain gym_v1)
+(define (domain gym_v5)
 
 ;remove requirements that are not needed
 (:requirements :fluents :durative-actions :timed-initial-literals :typing :conditional-effects :negative-preconditions :duration-inequalities :equality)
@@ -18,18 +18,18 @@
 )
 
 (:predicates
-    (not-exercising)
+    (not-exercising ?p - person)
     (current-exercise ?p - person ?e - exercise)
 
     (exercise-change ?e1 ?e2 - exercise)
-    (idle)
+    (idle ?p - person)
 
     (exercise-need ?e - exercise ?eq - equipment)
     (at ?p - person ?eq - equipment)
     (not-using ?eq - equipment)
     (location-change ?eq1 ?eq2 - equipment)
     (equal ?eq1 ?eq2 - equipment)
-    (moving)
+    (not-moving ?p - person)
 )
 
 
@@ -51,23 +51,23 @@
     :parameters (?p - person ?eq - equipment ?e - exercise ?l - length)
     :duration (= ?duration (exe-length ?l))
     :condition (and
-        (at start (not-exercising))
+        (at start (not-exercising ?p))
         (at start (< (exe-count ?p ?e) (max-exercise-count)))
 
-        (at start (idle))
+        (at start (idle ?p))
 
         (at start (exercise-need ?e ?eq))
 
         (over all (at ?p ?eq))
-
+        (at start (not-moving ?p))
     )
     :effect (and
-        (at start (not (not-exercising)))
+        (at start (not (not-exercising ?p)))
         (at start (not (current-exercise ?p warmup)))
         (at start (current-exercise ?p ?e))
 
         (at end (and
-            (not-exercising)
+            (not-exercising ?p)
             (increase (exe-count ?p ?e) 1)
             (increase (exe-duration ?p ?e) (exe-length ?l))
             (increase (workout_duration ?p) (exe-length ?l))
@@ -83,49 +83,54 @@
         :condition (and
             (at start (current-exercise ?p ?from))
             (at start (exercise-change ?from ?to))
-
+            (at start (< (exe-count ?p ?to) (max-exercise-count)))
             (at end (current-exercise ?p ?to))
         ) 
         :effect (and
-            (at start (idle))
+            (at start (idle ?p))
 
-            (at end (not (idle)))
+            (at end (not (idle ?p)))
         )
 )
 
-(:durative-action using_equip
-    :parameters (?p - person ?eq - equipment)
-    :duration (= ?duration 31)
-    :condition (and 
-        (at start (not-using ?eq))
-        (at start (moving))
-    )
-    :effect (and 
-        (at start (and 
-            (not (at ?p not_gym))
-            (not (not-using ?eq))
-            (at ?p ?eq)
-        ))
-        (at end (and 
-            (not-using ?eq)
-            (not (at ?p ?eq))
-        ))
-    )
-)
+; (:durative-action using_equip
+;     :parameters (?p - person ?eq - equipment)
+;     :duration (= ?duration 31)
+;     :condition (and 
+;         (at start (not-using ?eq))
+;         (at start (moving ?p))
+;         ; (at start (at ?p ?eq))
+;     )
+;     :effect (and 
+;         (at start (and 
+;             (not (at ?p not_gym))
+;             (not (not-using ?eq))
+;             (at ?p ?eq)
+;         ))
+;         (at end (and 
+;             (not-using ?eq)
+;         ))
+;     )
+; )
 
-(:durative-action move
+(:durative-action move_and_using
     :parameters (?p - person ?from ?to - equipment)
-    :duration (= ?duration 0.1)
+    :duration (= ?duration 30.5)
     :condition (and
         (at start (location-change ?from ?to))
         (at start (at ?p ?from))
-
+        (at start (not-using ?to))
+        
         (at end (at ?p ?to))
     )
     :effect (and
-        (at start (moving))
+        (at start (not-moving ?p))
+        (at start (not (at ?p ?from)))
+        (at start (at ?p ?to))
+        (at start (not (not-using ?to)))
 
-        (at end (not (moving)))
+        (at end (not (not-moving ?p)))
+        (at end (not-using ?to))
     )
 )
 

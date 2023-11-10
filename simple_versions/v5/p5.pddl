@@ -1,8 +1,8 @@
-(define (problem workout_v1) (:domain gym_v1)
+(define (problem workout_v5) (:domain gym_v5)
 (:objects 
     squat jj sp bp curls - exercise
     short mid long - length
-    john noon- person
+    john noon - person
     a_space rack dumbell - equipment
 )
 
@@ -23,7 +23,7 @@
     (exercise-need curls dumbell)
 
     ; Restriction
-    (= (max-exercise-count) 3)
+    (= (max-exercise-count) 2)
 
     ; John's initial counts
     (= (exe-count john squat) 0)
@@ -43,8 +43,10 @@
 
     (= (workout_duration john) 0)   
 
+    ; John's initial status
+    (current-exercise john warmup)
 
-    ; Initial counts for Noon
+    ; Noon's initial counts
     (= (exe-count noon squat) 0)
     (= (exe-duration noon squat) 0)
     
@@ -62,12 +64,9 @@
 
     (= (workout_duration noon) 0)   
 
-
-    ; John's initial status
-    (current-exercise john warmup)
-    
     ; Noon's initial status
     (current-exercise noon warmup)
+    
 
     ; Required Predicates to switch between exercises
     (exercise-change warmup squat)
@@ -94,11 +93,13 @@
     (exercise-change bp jj)
     (exercise-change bp sp)
     (exercise-change bp bp)
+    (exercise-change bp curls)
     (exercise-change curls curls)
     (exercise-change curls squat)
     (exercise-change curls jj)
     (exercise-change curls sp)
     (exercise-change curls bp)
+
     (location-change not_gym a_space)
     (location-change not_gym rack)
     (location-change not_gym dumbell)
@@ -113,40 +114,34 @@
     (location-change dumbell dumbell)
 
 
-    (not-exercising)
+    (not-exercising john)
+    (not-exercising noon)
     
     (not-using a_space)
     (not-using rack)
     (not-using dumbell)
 
     (at john not_gym)
+    (at noon not_gym)
 
 )
 
 (:goal (and
-    ;todo: put the goal condition here
-    (not-exercising)
+    (not-exercising john)
+    (not-exercising noon)
 
     ; John workout duration in total
-    (>= (workout_duration john) 90)
+    (>= (workout_duration john) 60)
     ; John squat goal
-    (>= (exe-duration john squat) 30)
+    ; (>= (exe-duration john squat) 30)
     ; John jumping jack goal
-    (= (exe-duration john jj) 20)
-    (= (exe-duration john curl) 20)
-
-    ; Noon workout duration in total
-    (>= (workout_duration noon) 90)
-    ; John squat goal
-    (>= (exe-duration noon squat) 20)
-    ; John jumping jack goal
-    (= (exe-duration noon jj) 30)
-    (= (exe-duration noon curls) 30)
+    ; (= (exe-duration john jj) 20)
+    ; (= (exe-duration john curls) 20)
 
     ; John rack's goal
     ; (= (exe-duration john bp) 10) ; if uncomment then it will stuck forever
     ; (>= (exe-duration john sp) 10) ; if uncomment then it will stuck forever
-
+    (>= (workout_duration noon) 60)
 ))
 
 
