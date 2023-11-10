@@ -111,7 +111,7 @@
     (>= (exe-duration john squat) 30)
     ; John jumping jack goal
     (= (exe-duration john jj) 20)
-    (= (exe-duration john curl) 20)
+    (= (exe-duration john curls) 20)
 
     ; John rack's goal
     ; (= (exe-duration john bp) 10) ; if uncomment then it will stuck forever
