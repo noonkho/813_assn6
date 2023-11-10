@@ -72,6 +72,7 @@
     (exercise-change bp jj)
     (exercise-change bp sp)
     (exercise-change bp bp)
+    (exercise-change bp curls)
     (exercise-change curls curls)
     (exercise-change curls squat)
     (exercise-change curls jj)

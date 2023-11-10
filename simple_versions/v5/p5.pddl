@@ -1,6 +1,6 @@
 (define (problem workout_v1) (:domain gym_v1)
 (:objects 
-    squat jj sp bp curls- exercise
+    squat jj sp bp curls - exercise
     short mid long - length
     john noon- person
     a_space rack dumbell - equipment
